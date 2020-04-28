@@ -1,6 +1,6 @@
 let backendHost;
 if(process.env.NODE_ENV==="production"){
-    backendHost='http://167.71.41.90'
+    backendHost='https://social-media-api2.herokuapp.com/'
 }else{
     backendHost='http://localhost:3001'
 }
