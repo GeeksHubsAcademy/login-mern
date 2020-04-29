@@ -1,18 +1,17 @@
-import React, { useState } from 'react'
+import React  from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Login.scss';
 import { login } from '../../../redux/actions';
 const Login = props => {
-    const [user, setUser] =useState({});
     const handleSubmit = event =>{
         event.preventDefault();
         const user ={
             email:event.target.email.value,
             password:event.target.password.value
         }
-        setUser(user)
         login(user);
+        props.history.push('/profile');
     }
     return (
         <div className="loginContainer">

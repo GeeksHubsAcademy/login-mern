@@ -5,6 +5,13 @@ const {
     jwt_auth_secret
 } = require('../config/keys');
 const UserController = {
+    getAll(req,res) {
+        UserModel.find()
+        .populate('followers')
+        .populate('following')
+        .then(users=>res.send(users))
+        .catch(console.error)
+    },
     async register(req, res) {
         try {
             req.body.password = await bcrypt.hash(req.body.password, 9)
@@ -30,8 +37,9 @@ const UserController = {
     },
     async follow(req, res) {
         try {
-            console.log(req.user.following.includes(req.params.user_id))
-            if (!req.user.following.includes(req.params.user_id)) {
+            const isSameUser = req.params.user_id === '' + req.user._id;
+            const isAlreadyFollowingUser = req.user.following.includes(req.params.user_id);
+            if (!isAlreadyFollowingUser && !isSameUser) {
                 await UserModel.findByIdAndUpdate(req.user._id, {
                     $push: {
                         following: req.params.user_id
@@ -70,6 +78,7 @@ const UserController = {
             const token = jwt.sign({
                 _id: user._id
             }, jwt_auth_secret);
+            if (user.tokens.length > 4) user.tokens.shift();
             user.tokens.push(token);
             await user.replaceOne(user);
             res.send({

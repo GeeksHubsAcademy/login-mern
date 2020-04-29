@@ -3,7 +3,12 @@ const reducer = (state = {products:[]}, action) => {
         case 'LOGIN':
             return {
                 ...state,
-                user: action.user
+                user: action.payload
+            }
+        case 'GET_ALL_USERS':
+            return {
+                ...state,
+                users: action.payload
             }
         default:
             return state;

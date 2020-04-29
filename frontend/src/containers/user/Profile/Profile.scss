@@ -1,0 +1,20 @@
+    @import '../../../colors.scss';
+    .profileContainer {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5em;
+        .userHeader {
+            display: flex;
+            img {
+                max-width: 20%;
+            }
+        }
+        button {
+            all: unset;
+            padding: 0.8em;
+            background-color: $Solid;
+            border-radius: 0.3em;
+            width: 5em;
+            cursor: pointer;
+        }
+    }
