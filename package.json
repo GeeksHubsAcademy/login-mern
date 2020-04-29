@@ -1,0 +1,17 @@
+{
+    "name": "angular-fifth",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "concurrently \"npm run start:front\" \"npm run start:back\" ",
+        "start:back": "cd backend && nodemon index.js",
+        "start:front": "cd frontend && npm start",
+        "install:back": "cd backend && npm install",
+        "install:front": "cd frontend && npm install",
+        "postinstall": "concurrently \"npm run install:front\" \"npm run install:back\" "
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}

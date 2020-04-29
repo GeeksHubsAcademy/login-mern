@@ -11,11 +11,13 @@ const User = ({ user, myUser }) => {
             <span>Followers:{user.followers.length}</span>
             <span>Following:{user.following.length}</span>
         </div>
-        <div className="botones">
+        <div className="botones"    >
             <button
             onClick={isAlreadyFollowed ? () =>unfollow(user._id): () => follow(user._id)}
-             className={user._id === myUser._id ? 'primary hidden' : 'primary'}
-             >{isAlreadyFollowed ? 'Unfollow':'Follow'}</button>
+            className={user._id === myUser._id ? 'primary hidden' : 'primary'}
+            >{isAlreadyFollowed ? 'Unfollow':'Follow'}</button>
+            {console.log(myUser.followers,user._id,myUser.followers.includes(user._id))}
+            <p>{myUser.followers.includes(user._id) && 'Te sigue'}</p>
             
         </div>
     </div>
