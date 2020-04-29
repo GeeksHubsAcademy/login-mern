@@ -2,7 +2,8 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Register.scss';
-import axios from 'axios'
+import axios from 'axios';
+import {API_URL} from '../../../api-config'
 const Register = props => {
     const handleSubmit = event =>{
         event.preventDefault();
@@ -11,7 +12,7 @@ const Register = props => {
             email:event.target.email.value,
             password:event.target.password.value
         }
-        axios.post('http://localhost:3001/users/register',user)
+        axios.post(API_URL+'/users/register',user)
         .then(res=>{
             setTimeout(() => {
                 //this.router.navigate([])

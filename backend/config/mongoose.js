@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const mongo_URI = process.env.mongo_URI || 'mongodb://localhost:27017/login-mern'
+const {mongo_atlas} = require('./keys.js');
+const mongo_URI = process.env.NODE_ENV === 'production'? mongo_atlas : 'mongodb://localhost:27017/login-mern'
 mongoose.connect(mongo_URI,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
