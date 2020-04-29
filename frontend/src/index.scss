@@ -1,14 +1,31 @@
 @import './colors.scss';
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: $Ligth;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: $Ligth;
+}
+
+button.primary {
+    all: unset;
+    padding: 0.8em;
+    background-color: $Solid;
+    border-radius: 0.3em;
+    width: 5em;
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover {
+        background-color: $SolidDark;
+        box-shadow: 3px 3px rgba(0, 0, 0, 0.75);
+    }
+}
+
+button.hidden {
+    visibility: hidden;
 }

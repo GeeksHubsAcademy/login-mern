@@ -1,4 +1,4 @@
-const reducer = (state = {products:[]}, action) => {
+const reducer = (state = {}, action) => {
     switch (action.type) {
         case 'LOGIN':
             return {
@@ -8,7 +8,8 @@ const reducer = (state = {products:[]}, action) => {
         case 'GET_ALL_USERS':
             return {
                 ...state,
-                users: action.payload
+                users: action.payload.users,
+                user: action.payload.user
             }
         default:
             return state;

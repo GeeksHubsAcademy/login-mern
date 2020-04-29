@@ -12,7 +12,7 @@ const Register = props => {
             email:event.target.email.value,
             password:event.target.password.value
         }
-        axios.post(API_URL+'/users/register',user)
+        axios.post(API_URL+'users/register',user)
         .then(res=>{
             setTimeout(() => {
                 //this.router.navigate([])

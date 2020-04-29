@@ -1,0 +1,20 @@
+.usersContainer {
+    .user {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        border: solid 2px black;
+        margin: 0.3em;
+        border-radius: 1em;
+        .userDatos {
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    }
+    img {
+        max-width: 16%;
+    }
+}

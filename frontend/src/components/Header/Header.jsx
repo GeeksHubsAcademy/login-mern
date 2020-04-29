@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import './Header.scss';
 const Header = props => {
     return <header className="header">
-        <NavLink to='/' exact>Home</NavLink>
+    <NavLink to='/' exact>Home</NavLink>
+        <NavLink to='/users' exact>Users</NavLink>
 
         {props.pedro ?
             <div className="userZone">

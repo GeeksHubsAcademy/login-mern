@@ -5,12 +5,12 @@ const {
     jwt_auth_secret
 } = require('../config/keys');
 const UserController = {
-    getAll(req,res) {
+    getAll(req, res) {
         UserModel.find()
-        .populate('followers')
-        .populate('following')
-        .then(users=>res.send(users))
-        .catch(console.error)
+            .populate('followers')
+            .populate('following')
+            .then(users => res.send({ users, user: req.user }))
+            .catch(console.error)
     },
     async register(req, res) {
         try {
@@ -39,23 +39,57 @@ const UserController = {
         try {
             const isSameUser = req.params.user_id === '' + req.user._id;
             const isAlreadyFollowingUser = req.user.following.includes(req.params.user_id);
+            let user = req.user;
             if (!isAlreadyFollowingUser && !isSameUser) {
-                await UserModel.findByIdAndUpdate(req.user._id, {
+                user = await UserModel.findByIdAndUpdate(req.user._id, {
                     $push: {
                         following: req.params.user_id
                     }
+                }, {
+                    new: true
                 });
+                console.log(user.following)
                 await UserModel.findByIdAndUpdate(req.params.user_id, {
                     $push: {
                         followers: req.user._id
                     }
                 });
             }
-            res.send(req.user)
+            console.log(user.following)
+            res.send(user)
         } catch (error) {
             console.log(error);
             res.status(500).send({
                 message: 'There was a problem trying to follow'
+            })
+        }
+    },
+    async unfollow(req, res) {
+        try {
+            const isSameUser = req.params.user_id === '' + req.user._id;
+            const isAlreadyFollowingUser = req.user.following.includes(req.params.user_id);
+            let user = req.user;
+            if (isAlreadyFollowingUser && !isSameUser) {
+                user = await UserModel.findByIdAndUpdate(req.user._id, {
+                    $pull: {
+                        following: req.params.user_id
+                    }
+                }, {
+                    new: true
+                });
+                console.log(user.following)
+                await UserModel.findByIdAndUpdate(req.params.user_id, {
+                    $pull: {
+                        followers: req.user._id
+                    }
+                });
+            }
+            console.log(user.following)
+            res.send(user)
+        } catch (error) {
+            console.log(error);
+            res.status(500).send({
+                message: 'There was a problem trying to unfollow'
             })
         }
     },
