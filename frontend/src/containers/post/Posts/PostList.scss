@@ -1,0 +1,19 @@
+@import '../../../colors.scss';
+.postListContainer {
+    padding: 1.5em;
+    .post {
+        display: flex;
+        padding: 1em;
+        margin: 0.5em;
+        background-color: $SolidDark;
+        color: $Ligth;
+        min-height: 10vh;
+        border-radius: 0.3em;
+    }
+    textarea {
+        all: unset;
+        border-radius: 0.3em;
+        border: solid $SolidDark;
+        width: 90%;
+    }
+}

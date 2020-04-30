@@ -9,7 +9,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: $Ligth;
+    background-color: $Ligth !important;
 }
 
 button.primary {
@@ -20,6 +20,7 @@ button.primary {
     width: 5em;
     cursor: pointer;
     transition: all 0.5s;
+    color: $Ligth;
     &:hover {
         background-color: $SolidDark;
         box-shadow: 3px 3px rgba(0, 0, 0, 0.75);

@@ -29,7 +29,6 @@ const isAuthor = async(req, res, next) => {
     try {
 
         const post = await Post.findById(req.params.post_id);
-
         if (post.user.toString() !== req.user._id.toString()) {
             return res.status(403).send({
                 message: 'You are not the author'

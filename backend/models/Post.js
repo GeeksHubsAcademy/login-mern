@@ -5,6 +5,7 @@ const PostSchema = new mongoose.Schema({
         type: ObjectId,
         ref: 'User'
     },
+    image: String,
     message: String,
     likes: [ObjectId],
     dislikes: [ObjectId]

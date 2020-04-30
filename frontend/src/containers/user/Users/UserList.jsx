@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { getAllUsers } from '../../../redux/actions/users'
 import { connect } from 'react-redux';
-import './Users.scss'
+import './UserList.scss'
 import User from '../User/User';
 const Users = props => {
     useEffect(() => {
