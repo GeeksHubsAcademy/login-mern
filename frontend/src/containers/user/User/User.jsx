@@ -1,5 +1,5 @@
 import React from 'react'
-import { follow, unfollow } from '../../../redux/actions';
+import { follow, unfollow } from '../../../redux/actions/users';
 
 const User = ({ user, myUser }) => {
     const isAlreadyFollowed = myUser?.following.includes(user._id);

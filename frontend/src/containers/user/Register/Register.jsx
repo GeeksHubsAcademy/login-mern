@@ -2,8 +2,8 @@ import React from 'react'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Register.scss';
-import axios from 'axios';
-import {API_URL} from '../../../api-config'
+import { register } from '../../../redux/actions/users';
+import {  notification } from 'antd';
 const Register = props => {
     const handleSubmit = event =>{
         event.preventDefault();
@@ -12,12 +12,15 @@ const Register = props => {
             email:event.target.email.value,
             password:event.target.password.value
         }
-        axios.post(API_URL+'users/register',user)
-        .then(res=>{
+        register(user).then(res => {
+            notification.success({message:'Register',description:res.data.message})
             setTimeout(() => {
                 //this.router.navigate([])
                 props.history.push('/login')
             }, 1500);
+        })
+        .catch(()=>{
+            notification.error({message:'Register',description:'Hubo un problema al registrarse'})
         })
     }
     return (

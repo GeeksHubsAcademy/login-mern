@@ -7,5 +7,6 @@ router.get('/follow/:user_id', authentication, UserController.follow);
 router.get('/unfollow/:user_id', authentication, UserController.unfollow);
 router.post('/register', UserController.register);
 router.post('/login', UserController.login);
+router.get('/logout', authentication, UserController.logout);
 
 module.exports = router;
