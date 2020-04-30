@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
-
-const Posts = () => {
+import { getAllPosts } from '../../../redux/actions/posts'
+import { connect } from 'react-redux'
+const Posts = ({posts}) => {
     useEffect(() => {
-        
-        
+        getAllPosts();
     }, [])
     return (
         <div>
-            Posts
+            {posts?.map(post=><div>{post.message}</div>)}
         </div>
     )
 }
-export default Posts;
+const mapStateToProps = ({post}) => ({posts:post.posts});
+export default connect(mapStateToProps) (Posts);
