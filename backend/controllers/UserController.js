@@ -1,4 +1,4 @@
-const UserModel = require('../models/User.js');
+const User = require('../models/User.js');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const {
@@ -6,7 +6,7 @@ const {
 } = require('../config/keys');
 const UserController = {
     getAll(req, res) {
-        UserModel.find()
+        User.find()
             .populate('followers')
             .populate('following')
             .then(users => res.send({ users, user: req.user }))
@@ -15,7 +15,7 @@ const UserController = {
     async register(req, res) {
         try {
             req.body.password = await bcrypt.hash(req.body.password, 9)
-            const user = await UserModel.create(req.body);
+            const user = await User.create(req.body);
             res.status(201).send({
                 user,
                 message: 'Usuario creado con éxito'
@@ -29,7 +29,7 @@ const UserController = {
         }
     },
     getInfo(req, res) {
-        UserModel.findById(req.user._id)
+        User.findById(req.user._id)
             .populate('followers')
             .populate('following')
             .then(user => res.send(user))
@@ -41,7 +41,7 @@ const UserController = {
             const isAlreadyFollowingUser = req.user.following.includes(req.params.user_id);
             let user = req.user;
             if (!isAlreadyFollowingUser && !isSameUser) {
-                user = await UserModel.findByIdAndUpdate(req.user._id, {
+                user = await User.findByIdAndUpdate(req.user._id, {
                     $push: {
                         following: req.params.user_id
                     }
@@ -49,7 +49,7 @@ const UserController = {
                     new: true
                 });
                 console.log(user.following)
-                await UserModel.findByIdAndUpdate(req.params.user_id, {
+                await User.findByIdAndUpdate(req.params.user_id, {
                     $push: {
                         followers: req.user._id
                     }
@@ -70,7 +70,7 @@ const UserController = {
             const isAlreadyFollowingUser = req.user.following.includes(req.params.user_id);
             let user = req.user;
             if (isAlreadyFollowingUser && !isSameUser) {
-                user = await UserModel.findByIdAndUpdate(req.user._id, {
+                user = await User.findByIdAndUpdate(req.user._id, {
                     $pull: {
                         following: req.params.user_id
                     }
@@ -78,7 +78,7 @@ const UserController = {
                     new: true
                 });
                 console.log(user.following)
-                await UserModel.findByIdAndUpdate(req.params.user_id, {
+                await User.findByIdAndUpdate(req.params.user_id, {
                     $pull: {
                         followers: req.user._id
                     }
@@ -95,7 +95,7 @@ const UserController = {
     },
     async login(req, res) {
         try {
-            const user = await UserModel.findOne({
+            const user = await User.findOne({
                 email: req.body.email
             });
             if (!user) {
