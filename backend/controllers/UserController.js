@@ -32,7 +32,7 @@ const UserController = {
         User.findById(req.user._id)
             .populate('followers')
             .populate('following')
-            .then(user => res.send(user))
+            .then((user) => res.send(user))
             .catch(console.error);
     },
     async follow(req, res) {
@@ -103,7 +103,7 @@ const UserController = {
                     message: 'Email o contraseña incorrectos'
                 })
             }
-            const isMatch = bcrypt.compare(req.body.password, user.password);
+            const isMatch = await bcrypt.compare(req.body.password, user.password);
             if (!isMatch) {
                 return res.status(400).send({
                     message: 'Email o contraseña incorrectos'
